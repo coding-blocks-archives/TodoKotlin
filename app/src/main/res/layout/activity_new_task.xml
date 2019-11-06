@@ -17,6 +17,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarAddTask"
+            app:title="New Task"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="?attr/colorPrimary"
@@ -38,6 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:id="@+id/titleInpLay"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp">
 
@@ -46,6 +48,7 @@
             android:layout_height="wrap_content"
             android:hint="Enter Task title"
             android:paddingStart="8dp"
+            android:inputType="textCapWords"
             android:paddingEnd="8dp"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -64,12 +67,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:id="@+id/taskInpLay"
         android:layout_marginBottom="16dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter your Task"
+            android:lines="3"
+            android:gravity="start"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:textSize="18sp" />
@@ -96,9 +102,10 @@
             android:layout_height="wrap_content"
             android:hint="Set Date"
             android:clickable="true"
+            android:id="@+id/dateEdt"
             android:cursorVisible="false"
             android:drawablePadding="8dp"
-            android:drawableStart="@drawable/ic_date_range_black_24dp"
+            android:drawableEnd="@drawable/ic_date_range_black_24dp"
             android:drawableTint="@color/colorAccent"
             android:focusable="false"
             android:paddingStart="8dp"
@@ -111,6 +118,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:visibility="gone"
+        android:id="@+id/timeInptLay"
         android:layout_marginBottom="16dp">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -118,9 +127,10 @@
             android:layout_height="wrap_content"
             android:hint="Set Time"
             android:clickable="true"
+            android:id="@+id/timeEdt"
             android:cursorVisible="false"
             android:drawablePadding="8dp"
-            android:drawableStart="@drawable/ic_access_time_black_24dp"
+            android:drawableEnd="@drawable/ic_access_time_black_24dp"
             android:drawableTint="@color/colorAccent"
             android:focusable="false"
             android:paddingStart="8dp"
@@ -155,6 +165,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:text="Save Task"
+        android:id="@+id/saveBtn"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:layout_gravity="end"
