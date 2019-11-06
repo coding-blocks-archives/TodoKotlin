@@ -10,7 +10,7 @@ class TaskModel(
     var category: String,
     var date: String? = null,
     var time: String? = null,
-    var finish: String? = null,
+    var finish: Int = TASK_IS_NOT_FINISH,
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
 
