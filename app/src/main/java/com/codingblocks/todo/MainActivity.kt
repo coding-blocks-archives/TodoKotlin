@@ -6,7 +6,10 @@ import android.content.Intent
 import android.graphics.*
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -36,6 +39,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setSupportActionBar(toolbarAddTask)
+
 
         recyclerViewTask.setHasFixedSize(true)
         recyclerViewTask.layoutManager = LinearLayoutManager(this)
@@ -47,17 +52,62 @@ class MainActivity : AppCompatActivity() {
         fabAddTask.setOnClickListener {
             startActivity(Intent(this, NewTaskActivity::class.java))
         }
+        displayTasks()
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        val item = menu.findItem(R.id.search)
+        val searchView = item.actionView as SearchView
+        item.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
+            override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
+                displayTasks()
+                return true
+
+            }
+
+            override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
+                displayTasks()
+                return true
+
+            }
+
+        })
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                if (newText.isNotEmpty())
+                    displayTasks(newText)
+                return true
+            }
+        })
+        return true
+    }
+
+    private fun displayTasks(searchQuery: String = "") {
         db.taskDao().getTask(TASK_IS_NOT_FINISH).observe(this, Observer {
-            if (it.isNotEmpty()) {
-                mArrayList = it as ArrayList<TaskModel>
-                taskAdapter.setList(mArrayList)
+            if (!it.isEmpty()) {
+                taskAdapter.setList(it.filter { c ->
+                    c.title.contains(searchQuery, true) ||
+                            c.task.contains(searchQuery, true)
+                } as ArrayList<TaskModel>)
             } else {
-                mArrayList = it as ArrayList<TaskModel>
-                taskAdapter.setList(mArrayList)
+                taskAdapter.setList(arrayListOf())
             }
             txtNoTask.isVisible = it.isEmpty()
         })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.history -> {
+            startActivity(Intent(this, HistoryActivity::class.java))
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 
     override fun onStart() {
