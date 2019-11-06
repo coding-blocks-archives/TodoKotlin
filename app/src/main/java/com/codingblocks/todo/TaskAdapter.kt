@@ -4,12 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import java.util.ArrayList
+import java.util.*
 
 class TaskAdapter(var mArrayList: ArrayList<TaskModel>) : RecyclerView.Adapter<TaskViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val mView = LayoutInflater.from(parent.context).inflate(R.layout.row_task, parent, false)
-        return TaskViewHolder(mView)    }
+        return TaskViewHolder(mView)
+    }
 
     override fun getItemCount(): Int = mArrayList.size
 
@@ -18,7 +19,7 @@ class TaskAdapter(var mArrayList: ArrayList<TaskModel>) : RecyclerView.Adapter<T
     }
 }
 
-class TaskViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView)  {
+class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 }
 
