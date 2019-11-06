@@ -33,11 +33,9 @@ class AlarmReceiver : BroadcastReceiver() {
         val taskRowId = intent.extras?.getString(TASK_ID)
         val taskTitle = intent.extras?.getString(TASK_TITLE)
         val taskTask = intent.extras?.getString(TASK_TASK)
-        val rowId = taskRowId.toString()
+
+        //To Open the app on clicking notification
         val notificationIntent = Intent(context, MainActivity::class.java)
-//        notificationIntent.putExtra(Constant.ROW_ID, rowId)
-//        notificationIntent.putExtra(Constant.NOTIFICATION, true)
-        notificationIntent.action = "EDIT"
         val pendingIntent = PendingIntent.getActivity(
             context,
             0,
@@ -46,8 +44,7 @@ class AlarmReceiver : BroadcastReceiver() {
         )
 
         val notificationFinishIntent = Intent(context, MainActivity::class.java)
-//        notificationFinishIntent.putExtra(Constant.ROW_ID, rowId)
-//        notificationFinishIntent.putExtra(Constant.NOTIFICATION, true)
+        notificationFinishIntent.putExtra(TASK_ID, taskRowId)
         notificationFinishIntent.action = "FINISH"
         val pendingFinishIntent = PendingIntent.getActivity(
             context,
@@ -69,12 +66,13 @@ class AlarmReceiver : BroadcastReceiver() {
             .setColor(Color.argb(225, 225, 87, 34))
             .setSmallIcon(icon)
             .setWhen(time)
-            .addAction(R.drawable.ic_edit_black_24dp, "Edit", pendingIntent)
             .addAction(R.drawable.ic_check_black_24dp, "Finish", pendingFinishIntent)
             .setAutoCancel(true)
             .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
             .build()
-        mNotificationManager.notify(Integer.parseInt(rowId/*rowId*/), notification)
+        mNotificationManager.notify(Integer.parseInt(taskRowId?:""/*rowId*/), notification)
+
+
 
     }
 }

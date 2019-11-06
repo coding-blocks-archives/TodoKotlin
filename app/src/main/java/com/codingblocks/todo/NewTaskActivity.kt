@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_new_task.*
@@ -29,6 +30,10 @@ class NewTaskActivity : AppCompatActivity(), View.OnClickListener {
     private var finalTask = ""
     private var finalCategoryName = "Default"
 
+    private val labels: ArrayList<String> =
+        arrayListOf("Personal", "Business", "Insurance", "Shopping", "Banking")
+
+
     val db: AppDatabase by lazy {
         Room.databaseBuilder(
             this,
@@ -48,10 +53,22 @@ class NewTaskActivity : AppCompatActivity(), View.OnClickListener {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }
-        
+
         saveBtn.setOnClickListener(this)
         dateEdt.setOnClickListener(this)
         timeEdt.setOnClickListener(this)
+
+        loadDataInSpinner()
+    }
+
+    private fun loadDataInSpinner() {
+        val dataAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, labels)
+
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        labels.sort()
+
+        spinnerCategory.adapter = dataAdapter
     }
 
     override fun onClick(view: View) {
@@ -65,15 +82,12 @@ class NewTaskActivity : AppCompatActivity(), View.OnClickListener {
                 setTime()
             }
             R.id.saveBtn -> {
-//                if (checkTask())
-                    saveTask()
+                finalCategoryName = spinnerCategory.selectedItem.toString()
+                saveTask()
             }
         }
     }
 
-    private fun checkTask(): Boolean {
-        return false
-    }
 
     private fun saveTask() {
         finalTitle = titleInpLay.editText?.text.toString().trim()
@@ -129,7 +143,6 @@ class NewTaskActivity : AppCompatActivity(), View.OnClickListener {
             pendingIntent
         )
         finish()
-
     }
 
     /**
