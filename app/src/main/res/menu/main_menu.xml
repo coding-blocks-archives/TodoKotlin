@@ -2,16 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
+    <item android:id="@+id/history"
         android:title="History"
-        android:id="@+id/history"
-        app:showAsAction="never"
-        />
+        app:showAsAction="never"/>
 
-    <item
+    <item android:id="@+id/search"
         android:title="Search"
-        android:id="@+id/search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="always|collapseActionView" />
+        app:showAsAction="ifRoom|collapseActionView"/>
 
 </menu>
