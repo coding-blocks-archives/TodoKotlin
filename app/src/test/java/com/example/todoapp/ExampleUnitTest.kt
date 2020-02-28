@@ -1,4 +1,4 @@
-package com.codingblocks.todo
+package com.example.todoapp
 
 import org.junit.Test
 

@@ -5,15 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".NewTaskActivity">
+    tools:context=".TaskActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:theme="@style/AppTheme.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarAddTask"
@@ -40,6 +38,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:id="@+id/titleInpLay"
+        app:hintTextColor="@color/colorAccent"
+        app:boxStrokeColor="@color/colorAccent"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp">
 
@@ -66,6 +66,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        app:hintTextColor="@color/colorAccent"
+        app:boxStrokeColor="@color/colorAccent"
         android:layout_marginEnd="16dp"
         android:id="@+id/taskInpLay"
         android:layout_marginBottom="16dp">
@@ -94,6 +96,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        app:hintTextColor="@color/colorAccent"
+        app:boxStrokeColor="@color/colorAccent"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp">
 
@@ -118,6 +122,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        app:hintTextColor="@color/colorAccent"
+        app:boxStrokeColor="@color/colorAccent"
         android:visibility="gone"
         android:id="@+id/timeInptLay"
         android:layout_marginBottom="16dp">
@@ -166,6 +172,7 @@
     <com.google.android.material.button.MaterialButton
         android:text="Save Task"
         android:id="@+id/saveBtn"
+        app:backgroundTint="@color/colorAccent"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:layout_gravity="end"
