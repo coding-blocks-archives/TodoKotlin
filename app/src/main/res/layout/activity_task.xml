@@ -15,11 +15,11 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarAddTask"
-            app:title="New Task"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="New Task" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -34,21 +34,21 @@
         android:textSize="16sp" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/titleInpLay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:id="@+id/titleInpLay"
-        app:hintTextColor="@color/colorAccent"
-        app:boxStrokeColor="@color/colorAccent"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="16dp"
+        app:boxStrokeColor="@color/colorAccent"
+        app:hintTextColor="@color/colorAccent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter Task title"
-            android:paddingStart="8dp"
             android:inputType="textCapWords"
+            android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -63,21 +63,21 @@
         android:textSize="16sp" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/taskInpLay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        app:hintTextColor="@color/colorAccent"
-        app:boxStrokeColor="@color/colorAccent"
         android:layout_marginEnd="16dp"
-        android:id="@+id/taskInpLay"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="16dp"
+        app:boxStrokeColor="@color/colorAccent"
+        app:hintTextColor="@color/colorAccent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="start"
             android:hint="Enter your Task"
             android:lines="3"
-            android:gravity="start"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:textSize="18sp" />
@@ -96,70 +96,73 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        app:hintTextColor="@color/colorAccent"
-        app:boxStrokeColor="@color/colorAccent"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="16dp"
+        app:boxStrokeColor="@color/colorAccent"
+        app:hintTextColor="@color/colorAccent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dateEdt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Set Date"
             android:clickable="true"
-            android:id="@+id/dateEdt"
             android:cursorVisible="false"
-            android:drawablePadding="8dp"
             android:drawableEnd="@drawable/ic_date_range_black_24dp"
+            android:drawablePadding="8dp"
             android:drawableTint="@color/colorAccent"
             android:focusable="false"
+            android:hint="Set Date"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:textSize="18sp" />
+
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/timeInptLay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        app:hintTextColor="@color/colorAccent"
+        android:layout_marginBottom="16dp"
         app:boxStrokeColor="@color/colorAccent"
-        android:visibility="gone"
-        android:id="@+id/timeInptLay"
-        android:layout_marginBottom="16dp">
+        app:hintTextColor="@color/colorAccent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/timeEdt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Set Time"
             android:clickable="true"
-            android:id="@+id/timeEdt"
             android:cursorVisible="false"
-            android:drawablePadding="8dp"
             android:drawableEnd="@drawable/ic_access_time_black_24dp"
+            android:drawablePadding="8dp"
             android:drawableTint="@color/colorAccent"
             android:focusable="false"
+            android:hint="Set Time"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+        />
     </com.google.android.material.textfield.TextInputLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:orientation="horizontal"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp">
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="horizontal">
 
         <Spinner
             android:id="@+id/spinnerCategory"
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp" />
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1" />
 
         <ImageView
             android:id="@+id/imgAddCategory"
@@ -170,15 +173,13 @@
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:text="Save Task"
         android:id="@+id/saveBtn"
-        app:backgroundTint="@color/colorAccent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:layout_gravity="end"
-        app:cornerRadius="25dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-
+        android:text="Save Task"
+        app:backgroundTint="@color/colorAccent"
+        app:cornerRadius="25dp" />
 </LinearLayout>

@@ -1,15 +1,19 @@
 package com.example.todoapp
 
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
+import android.app.*
+import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
-import androidx.room.Room
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.getSystemService
 import kotlinx.android.synthetic.main.activity_task.*
+import kotlinx.android.synthetic.main.alert.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -18,7 +22,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 const val DB_NAME = "todo.db"
-
 class TaskActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var myCalendar: Calendar
@@ -29,9 +32,7 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
     var finalDate = 0L
     var finalTime = 0L
 
-
     private val labels = arrayListOf("Personal", "Business", "Insurance", "Shopping", "Banking")
-
 
     val db by lazy {
         AppDatabase.getDatabase(this)
@@ -46,17 +47,29 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
         saveBtn.setOnClickListener(this)
 
 
-        setUpSpinner()
-    }
-
-    private fun setUpSpinner() {
         val adapter =
             ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, labels)
 
         labels.sort()
 
         spinnerCategory.adapter = adapter
+        imgAddCategory.setOnClickListener {
+
+          val alertDialog = AlertDialog.Builder(this)
+          val  custom_layout = layoutInflater.inflate(R.layout.alert,null)
+          alertDialog.setView(custom_layout)
+           alertDialog.setPositiveButton("Submit",DialogInterface.OnClickListener { dialog, which ->
+
+               labels.add(custom_layout.spin.text.toString())
+               labels.sort()
+               adapter.notifyDataSetChanged()
+           })
+          val dial : AlertDialog = alertDialog.create();
+            dial.setCanceledOnTouchOutside(true)
+            dial.show()
+        }
     }
+
 
     override fun onClick(v: View) {
         when (v.id) {
@@ -77,19 +90,22 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
         val category = spinnerCategory.selectedItem.toString()
         val title = titleInpLay.editText?.text.toString()
         val description = taskInpLay.editText?.text.toString()
+        val  model =  TodoModel(
+            title,
+            description,
+            category,
+            finalDate,
+            finalTime
+        )
 
         GlobalScope.launch(Dispatchers.Main) {
             val id = withContext(Dispatchers.IO) {
                 return@withContext db.todoDao().insertTask(
-                    TodoModel(
-                        title,
-                        description,
-                        category,
-                        finalDate,
-                        finalTime
-                    )
+                    model
                 )
             }
+
+
             finish()
         }
 
@@ -148,7 +164,6 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
         finalDate = myCalendar.time.time
         dateEdt.setText(sdf.format(myCalendar.time))
 
-        timeInptLay.visibility = View.VISIBLE
 
     }
 

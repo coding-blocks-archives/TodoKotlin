@@ -1,13 +1,21 @@
 package com.example.todoapp
 
+import android.app.AlarmManager
+import android.app.Notification
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Context.ALARM_SERVICE
 import android.content.Intent
 import android.graphics.*
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,7 +29,6 @@ class MainActivity : AppCompatActivity() {
 
     val list = arrayListOf<TodoModel>()
     var adapter = TodoAdapter(list)
-
     val db by lazy {
         AppDatabase.getDatabase(this)
     }
@@ -47,6 +54,7 @@ class MainActivity : AppCompatActivity() {
                 adapter.notifyDataSetChanged()
             }
         })
+
 
 
     }
@@ -209,4 +217,5 @@ class MainActivity : AppCompatActivity() {
     fun openNewTask(view: View) {
         startActivity(Intent(this, TaskActivity::class.java))
     }
+
 }
