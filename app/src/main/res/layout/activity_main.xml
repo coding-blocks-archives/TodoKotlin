@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         app:titleTextColor="@android:color/white"
@@ -17,12 +18,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_below="@+id/toolbar"
         android:id="@+id/todoRv"
-        tools:itemCount="3"
+        tools:itemCount="10"
         android:padding="8dp"
-        tools:listitem="@layout/item_todo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_alignParentBottom="true"
         android:layout_margin="32dp"
@@ -31,6 +30,5 @@
         android:layout_alignParentEnd="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-
 
 </RelativeLayout>
